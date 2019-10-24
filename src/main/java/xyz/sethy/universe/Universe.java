@@ -4,7 +4,7 @@ import xyz.sethy.universe.events.ElementMoveEvent;
 import xyz.sethy.universe.factories.NucleiFactory;
 import xyz.sethy.universe.location.Location;
 import xyz.sethy.universe.subatomic.Electron;
-import xyz.sethy.universe.utils.Thread;
+import xyz.sethy.universe.utils.UniverseThread;
 import xyz.sethy.universe.utils.event.ASyncEvent;
 import xyz.sethy.universe.utils.event.Event;
 
@@ -20,7 +20,7 @@ public class Universe {
     private static Universe instance;
     private final Set<Element> elements;
     private final NucleiFactory nucleiFactory;
-    private final Thread mainThread;
+    private final UniverseThread mainUniverseThread;
     private final Random random;
     private final Set<Event> nextTick;
     private boolean laskTickCompleted;
@@ -43,7 +43,7 @@ public class Universe {
             this.elements.add(element);
             System.out.println("Created Element: Hydrogen");
         }
-        this.mainThread = new Thread() {
+        this.mainUniverseThread = new UniverseThread() {
             @Override
             public void run() {
                 tick();
