@@ -1,5 +1,7 @@
 package xyz.sethy.universe.location;
 
+import java.util.Objects;
+
 /**
  * Created by seth on 26/06/17.
  */
@@ -23,7 +25,18 @@ public class Location {
         this.movement = speed;
     }
 
-    public boolean equals(Location location) {
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Location))
+            return false;
+
+        Location location = (Location) o;
+
         return getX() == location.getX() && getY() == location.getY() && getZ() == location.getZ();
     }
 
