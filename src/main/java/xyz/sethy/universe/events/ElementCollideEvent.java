@@ -3,14 +3,11 @@ package xyz.sethy.universe.events;
 import xyz.sethy.universe.Element;
 import xyz.sethy.universe.Nucleus;
 import xyz.sethy.universe.Universe;
-import xyz.sethy.universe.location.Location;
 import xyz.sethy.universe.location.Movement;
 import xyz.sethy.universe.subatomic.Electron;
-import xyz.sethy.universe.utils.LocationUtil;
 import xyz.sethy.universe.utils.event.ASyncEvent;
 import xyz.sethy.universe.utils.event.Event;
 
-import java.lang.annotation.ElementType;
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
@@ -18,24 +15,20 @@ import java.util.Set;
 /**
  * Created by seth on 26/06/17.
  */
-public class ElementCollideEvent extends Event implements ASyncEvent
-{
+public class ElementCollideEvent extends Event implements ASyncEvent {
     private final Set<Element> colliders;
     private Element result;
 
-    public ElementCollideEvent(final Set<Element> colliders)
-    {
+    public ElementCollideEvent(final Set<Element> colliders) {
         super("ElementCollideEvent");
         this.colliders = colliders;
     }
 
     @Override
-    public void handle()
-    {
+    public void handle() {
         final Set<Electron> electrons = new LinkedHashSet<>();
         Nucleus nucleus = getUniverse().getNucleiFactory().createEmptyNucleus();
-        for(Element element : this.colliders)
-        {
+        for (Element element : this.colliders) {
             nucleus = getUniverse().getNucleiFactory().mergeNuclei(nucleus, element.getNucleus());
             electrons.addAll(element.getElectrons());
         }
@@ -47,31 +40,28 @@ public class ElementCollideEvent extends Event implements ASyncEvent
         this.result.getLocation().setMovement(movement);
         Universe.getInstance().callEvent(new ElementCreationEvent(element));
 
-        for(Element element1 : getColliders())
+        for (Element element1 : getColliders())
             Universe.getInstance().callEvent(new ElementDestoryEvent(element1));
 
         System.out.println("ElementCollideEvent: Created an element with " + getResult().getNucleus().getProtons().size() + " protons.");
     }
 
-    public Set<Element> getColliders()
-    {
+    public Set<Element> getColliders() {
         return colliders;
     }
 
-    public Element getResult()
-    {
+    public Element getResult() {
         return result;
     }
 
-    private long getNextSpeed(Long currentSpeed)
-    {
+    private long getNextSpeed(Long currentSpeed) {
         long range = 533L;
         Random r = getUniverse().getRandom();
-        long number = (long)(r.nextDouble()*range);
+        long number = (long) (r.nextDouble() * range);
         long speed = currentSpeed;
 
         int next = getUniverse().getRandom().nextInt(1);
-        if(next == 0)
+        if (next == 0)
             speed = speed - number;
         else
             speed = speed + number;
@@ -79,8 +69,7 @@ public class ElementCollideEvent extends Event implements ASyncEvent
     }
 
     @Override
-    public boolean isAsyc()
-    {
+    public boolean isAsyc() {
         return true;
     }
 }

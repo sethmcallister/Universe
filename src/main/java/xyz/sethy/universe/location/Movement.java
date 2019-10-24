@@ -3,46 +3,38 @@ package xyz.sethy.universe.location;
 /**
  * Created by seth on 26/06/17.
  */
-public class Movement
-{
+public class Movement {
     private long speedX;
     private long speedY;
     private long speedZ;
 
-    public Movement(final long speedX, final long speedY, final long speedZ)
-    {
+    public Movement(final long speedX, final long speedY, final long speedZ) {
         this.speedX = speedX;
         this.speedY = speedY;
         this.speedZ = speedZ;
     }
 
-    public long getSpeedX()
-    {
+    public long getSpeedX() {
         return speedX;
     }
 
-    public void setSpeedX(long speedX)
-    {
+    public void setSpeedX(long speedX) {
         this.speedX = speedX;
     }
 
-    public long getSpeedY()
-    {
+    public long getSpeedY() {
         return speedY;
     }
 
-    public void setSpeedY(long speedY)
-    {
+    public void setSpeedY(long speedY) {
         this.speedY = speedY;
     }
 
-    public long getSpeedZ()
-    {
+    public long getSpeedZ() {
         return speedZ;
     }
 
-    public void setSpeedZ(long speedZ)
-    {
+    public void setSpeedZ(long speedZ) {
         this.speedZ = speedZ;
     }
 }

@@ -3,55 +3,47 @@ package xyz.sethy.universe.location;
 /**
  * Created by seth on 26/06/17.
  */
-public class Location
-{
+public class Location {
     private final long x;
     private final long y;
     private final long z;
     private Movement movement;
 
-    public Location(final long x, final long y, final long z)
-    {
+    public Location(final long x, final long y, final long z) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.movement = new Movement(1L, 2L, 4L);
     }
-    public Location(final long x, final long y, final long z, final Movement speed)
-    {
+
+    public Location(final long x, final long y, final long z, final Movement speed) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.movement = speed;
     }
 
-    public boolean equals(Location location)
-    {
+    public boolean equals(Location location) {
         return getX() == location.getX() && getY() == location.getY() && getZ() == location.getZ();
     }
 
-    public long getX()
-    {
+    public long getX() {
         return x;
     }
 
-    public long getY()
-    {
+    public long getY() {
         return y;
     }
 
-    public long getZ()
-    {
+    public long getZ() {
         return z;
     }
 
-    public Movement getMovement()
-    {
+    public Movement getMovement() {
         return this.movement;
     }
 
-    public void setMovement(Movement movement)
-    {
+    public void setMovement(Movement movement) {
         this.movement = movement;
     }
 }

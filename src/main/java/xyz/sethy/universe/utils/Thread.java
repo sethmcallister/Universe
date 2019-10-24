@@ -8,28 +8,22 @@ import java.util.TimerTask;
 /**
  * Created by seth on 26/06/17.
  */
-public abstract class Thread
-{
+public abstract class Thread {
     private boolean registered;
     private long lastExecution;
 
-    public Thread()
-    {
+    public Thread() {
         this.registered = false;
     }
 
-    public Thread register(Long delay)
-    {
-        if(this.registered)
-        {
-            getUniverse().throwExpection( getClass().getCanonicalName() + ": Thread already registered.");
+    public Thread register(Long delay) {
+        if (this.registered) {
+            getUniverse().throwExpection(getClass().getCanonicalName() + ": Thread already registered.");
             return this;
         }
-        TimerTask timerTask = new TimerTask()
-        {
+        TimerTask timerTask = new TimerTask() {
             @Override
-            public void run()
-            {
+            public void run() {
                 Thread.this.run();
                 lastExecution = System.nanoTime();
             }
@@ -42,8 +36,7 @@ public abstract class Thread
 
     public abstract void run();
 
-    protected Universe getUniverse()
-    {
+    protected Universe getUniverse() {
         return Universe.getInstance();
     }
 }

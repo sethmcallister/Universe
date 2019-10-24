@@ -14,21 +14,21 @@ import java.util.Set;
 /**
  * Created by seth on 25/06/17.
  */
-public class NucleiFactory
-{
-    public Nucleus createEmptyNucleus()
-    {
+public class NucleiFactory {
+    public static NucleiFactory getNewInstance() {
+        return new NucleiFactory();
+    }
+
+    public Nucleus createEmptyNucleus() {
         return new Nucleus(new LinkedHashSet<Neutron>(), new LinkedHashSet<Proton>());
     }
 
-    public Nucleus createACass()
-    {
+    public Nucleus createACass() {
         final Set<Proton> protons1 = new LinkedHashSet<>();
         final Set<Neutron> neutrons1 = new LinkedHashSet<>();
 
         int i = 0;
-        while(i < 29)
-        {
+        while (i < 29) {
             i++;
             final Set<Quark> quarks = new LinkedHashSet<>();
             quarks.add(new Quark(QuarkType.UP));
@@ -37,8 +37,7 @@ public class NucleiFactory
             protons1.add(new Proton(quarks));
         }
         i = 0;
-        while(i < 29)
-        {
+        while (i < 29) {
             i++;
             final Set<Quark> quarks = new LinkedHashSet<>();
             quarks.add(new Quark(QuarkType.UP));
@@ -52,8 +51,7 @@ public class NucleiFactory
         final Set<Neutron> neutrons2 = new LinkedHashSet<>();
 
         i = 0;
-        while(i < 52)
-        {
+        while (i < 52) {
             i++;
             final Set<Quark> quarks = new LinkedHashSet<>();
             quarks.add(new Quark(QuarkType.UP));
@@ -62,8 +60,7 @@ public class NucleiFactory
             protons1.add(new Proton(quarks));
         }
         i = 0;
-        while(i < 52)
-        {
+        while (i < 52) {
             i++;
             final Set<Quark> quarks = new LinkedHashSet<>();
             quarks.add(new Quark(QuarkType.UP));
@@ -75,9 +72,8 @@ public class NucleiFactory
         return mergeNuclei(nucleus1, nucleus2);
     }
 
-    public Nucleus createNewNucleus()
-    {
-        if(!EventUtil.isBigBang())
+    public Nucleus createNewNucleus() {
+        if (!EventUtil.isBigBang())
             throw new RuntimeException("It doesn't just work like that lol");
 
         final Set<Proton> protons = new LinkedHashSet<>();
@@ -98,8 +94,7 @@ public class NucleiFactory
         return new Nucleus(neutrons, protons);
     }
 
-    public Nucleus createNewNucleus(final Element from1, final Element from2)
-    {
+    public Nucleus createNewNucleus(final Element from1, final Element from2) {
         final Set<Proton> newProtons = new LinkedHashSet<>();
         final Set<Neutron> newNeutrons = new LinkedHashSet<>();
 
@@ -112,8 +107,7 @@ public class NucleiFactory
         return new Nucleus(newNeutrons, newProtons);
     }
 
-    public Nucleus mergeNuclei(final Nucleus from1, final Nucleus from2)
-    {
+    public Nucleus mergeNuclei(final Nucleus from1, final Nucleus from2) {
         final Set<Proton> newProtons = new LinkedHashSet<>();
         final Set<Neutron> newNeutrons = new LinkedHashSet<>();
 
@@ -124,10 +118,5 @@ public class NucleiFactory
         newNeutrons.addAll(from2.getNeutrons());
 
         return new Nucleus(newNeutrons, newProtons);
-    }
-
-    public static NucleiFactory getNewInstance()
-    {
-        return new NucleiFactory();
     }
 }
