@@ -23,7 +23,14 @@ public class Location {
         this.movement = speed;
     }
 
-    public boolean equals(Location location) {
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Location))
+            return false;
+
+        Location location = (Location) o;
+
         return getX() == location.getX() && getY() == location.getY() && getZ() == location.getZ();
     }
 
