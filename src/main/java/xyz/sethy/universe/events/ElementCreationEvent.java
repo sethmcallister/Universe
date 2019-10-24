@@ -6,19 +6,16 @@ import xyz.sethy.universe.utils.event.Event;
 /**
  * Created by seth on 26/06/17.
  */
-public class ElementCreationEvent extends Event
-{
+public class ElementCreationEvent extends Event {
     private final Element element;
 
-    public ElementCreationEvent(final Element element)
-    {
+    public ElementCreationEvent(final Element element) {
         super("ElementCreationEvent");
         this.element = element;
     }
 
     @Override
-    public void handle()
-    {
+    public void handle() {
         getUniverse().addElement(this.element);
     }
 }

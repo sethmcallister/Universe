@@ -11,43 +11,37 @@ import java.util.Set;
 /**
  * Created by seth on 26/06/17.
  */
-public class ElementMoveEvent extends Event implements ASyncEvent
-{
+public class ElementMoveEvent extends Event implements ASyncEvent {
     private final Location to;
     private final Location from;
     private final Element element;
 
-    public ElementMoveEvent(final Location to, final Location from, final Element element)
-    {
+    public ElementMoveEvent(final Location to, final Location from, final Element element) {
         super("ElementMoveEvent");
         this.to = to;
         this.from = from;
         this.element = element;
     }
 
-    public Location getTo()
-    {
+    public Location getTo() {
         return to;
     }
 
-    public Location getFrom()
-    {
+    public Location getFrom() {
         return from;
     }
 
-    public Element getElement()
-    {
+    public Element getElement() {
         return element;
     }
 
     @Override
-    public void handle()
-    {
+    public void handle() {
         this.element.setLocation(this.to);
 
         final Set<Element> colliders = new LinkedHashSet<>();
-        for(Element element : getUniverse().getElements())
-            if(element.getLocation().equals(this.to))
+        for (Element element : getUniverse().getElements())
+            if (element.getLocation().equals(this.to))
                 colliders.add(element);
 
         final ElementCollideEvent event = new ElementCollideEvent(colliders);
@@ -57,8 +51,7 @@ public class ElementMoveEvent extends Event implements ASyncEvent
     }
 
     @Override
-    public boolean isAsyc()
-    {
+    public boolean isAsyc() {
         return true;
     }
 }

@@ -3,24 +3,20 @@ package xyz.sethy.universe.subatomic.evensmaller;
 /**
  * Created by seth on 26/06/17.
  */
-public class Quark
-{
+public class Quark {
     private final QuarkType type;
     private final double mass;
 
-    public Quark(QuarkType type)
-    {
+    public Quark(QuarkType type) {
         this.type = type;
         this.mass = 2;
     }
 
-    public QuarkType getType()
-    {
+    public QuarkType getType() {
         return type;
     }
 
-    public double getMass()
-    {
+    public double getMass() {
         return mass;
     }
 }

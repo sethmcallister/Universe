@@ -16,18 +16,16 @@ import java.util.Set;
 /**
  * Created by seth on 26/06/17.
  */
-public class Universe
-{
+public class Universe {
     private static Universe instance;
     private final Set<Element> elements;
     private final NucleiFactory nucleiFactory;
     private final Thread mainThread;
     private final Random random;
-    private boolean laskTickCompleted;
     private final Set<Event> nextTick;
+    private boolean laskTickCompleted;
 
-    public Universe()
-    {
+    public Universe() {
         instance = this;
         this.elements = new LinkedHashSet<>();
         this.nucleiFactory = NucleiFactory.getNewInstance();
@@ -36,8 +34,7 @@ public class Universe
         this.laskTickCompleted = true;
 
         int i = 100;
-        while(i > 0)
-        {
+        while (i > 0) {
             i--;
             Nucleus nucleus = getNucleiFactory().createNewNucleus();
             final Set<Electron> electrons = new LinkedHashSet<>();
@@ -46,40 +43,33 @@ public class Universe
             this.elements.add(element);
             System.out.println("Created Element: Hydrogen");
         }
-        this.mainThread = new Thread()
-        {
+        this.mainThread = new Thread() {
             @Override
-            public void run()
-            {
+            public void run() {
                 tick();
             }
         }.register(1000L);
     }
 
-    public static Universe getInstance()
-    {
+    public static Universe getInstance() {
         return instance;
     }
 
-    private void tick()
-    {
-        if(!this.laskTickCompleted)
-        {
+    private void tick() {
+        if (!this.laskTickCompleted) {
             System.out.println("last tick not completed");
             return;
         }
         final Set<Event> events = new LinkedHashSet<>();
         events.addAll(this.nextTick);
-        for(Event event : events)
-        {
+        for (Event event : events) {
             event.handle();
             this.nextTick.remove(event);
         }
         events.clear();
 
         this.laskTickCompleted = false;
-        for(Element element : this.elements)
-        {
+        for (Element element : this.elements) {
             final Location from = element.getLocation();
             final Location to = new Location(from.getX() + from.getMovement().getSpeedX(), from.getY() + from.getMovement().getSpeedY(), from.getZ() + from.getMovement().getSpeedZ());
             final ElementMoveEvent event = new ElementMoveEvent(to, from, element);
@@ -119,13 +109,10 @@ public class Universe
         this.laskTickCompleted = true;
     }
 
-    public Set<Element> findAtLocation(final Location location)
-    {
+    public Set<Element> findAtLocation(final Location location) {
         final Set<Element> same = new LinkedHashSet<>();
-        for(Element element : this.elements)
-        {
-            if(element.getLocation().getX() == location.getX() && element.getLocation().getY() == location.getY() && element.getLocation().getZ() == element.getLocation().getZ())
-            {
+        for (Element element : this.elements) {
+            if (element.getLocation().getX() == location.getX() && element.getLocation().getY() == location.getY() && element.getLocation().getZ() == element.getLocation().getZ()) {
                 same.add(element);
                 System.out.println("one has the same location");
             }
@@ -133,41 +120,34 @@ public class Universe
         return same;
     }
 
-    public void callEvent(final Event event)
-    {
-        if(event instanceof ASyncEvent)
+    public void callEvent(final Event event) {
+        if (event instanceof ASyncEvent)
             event.handle();
         else
             this.nextTick.add(event);
     }
 
-    public void removeElement(Element element)
-    {
+    public void removeElement(Element element) {
         this.elements.remove(element);
     }
 
-    public void addElement(Element element)
-    {
+    public void addElement(Element element) {
         this.elements.add(element);
     }
 
-    public void throwExpection(final String expection)
-    {
+    public void throwExpection(final String expection) {
         System.out.println(expection);
     }
 
-    public Set<Element> getElements()
-    {
+    public Set<Element> getElements() {
         return elements;
     }
 
-    public NucleiFactory getNucleiFactory()
-    {
+    public NucleiFactory getNucleiFactory() {
         return nucleiFactory;
     }
 
-    public Random getRandom()
-    {
+    public Random getRandom() {
         return random;
     }
 }
