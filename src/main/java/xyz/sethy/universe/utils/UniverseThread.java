@@ -8,15 +8,15 @@ import java.util.TimerTask;
 /**
  * Created by seth on 26/06/17.
  */
-public abstract class Thread {
+public abstract class UniverseThread {
     private boolean registered;
     private long lastExecution;
 
-    public Thread() {
+    public UniverseThread() {
         this.registered = false;
     }
 
-    public Thread register(Long delay) {
+    public UniverseThread register(Long delay) {
         if (this.registered) {
             getUniverse().throwExpection(getClass().getCanonicalName() + ": Thread already registered.");
             return this;
@@ -24,7 +24,7 @@ public abstract class Thread {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Thread.this.run();
+                UniverseThread.this.run();
                 lastExecution = System.nanoTime();
             }
         };
