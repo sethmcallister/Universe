@@ -12,10 +12,7 @@ public class Location {
     private Movement movement;
 
     public Location(final long x, final long y, final long z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.movement = new Movement(1L, 2L, 4L);
+        this(x, y, z, new Movement(1L, 2L, 4L));
     }
 
     public Location(final long x, final long y, final long z, final Movement speed) {
