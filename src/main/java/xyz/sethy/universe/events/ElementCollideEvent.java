@@ -1,10 +1,12 @@
 package xyz.sethy.universe.events;
 
-import xyz.sethy.universe.Element;
-import xyz.sethy.universe.Nucleus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import xyz.sethy.universe.particle.Element;
+import xyz.sethy.universe.particle.Nucleus;
 import xyz.sethy.universe.Universe;
 import xyz.sethy.universe.location.Movement;
-import xyz.sethy.universe.subatomic.Electron;
+import xyz.sethy.universe.particle.subatomic.Electron;
 import xyz.sethy.universe.utils.event.ASyncEvent;
 import xyz.sethy.universe.utils.event.Event;
 
@@ -16,6 +18,8 @@ import java.util.Set;
  * Created by seth on 26/06/17.
  */
 public class ElementCollideEvent extends Event implements ASyncEvent {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElementCollideEvent.class);
+
     private final Set<Element> colliders;
     private Element result;
 
@@ -43,7 +47,7 @@ public class ElementCollideEvent extends Event implements ASyncEvent {
         for (Element element1 : getColliders())
             Universe.getInstance().callEvent(new ElementDestoryEvent(element1));
 
-        System.out.println("ElementCollideEvent: Created an element with " + getResult().getNucleus().getProtons().size() + " protons.");
+        LOGGER.debug("EmentCollideEvent: Created an element with {} protons", getResult().getNucleus().getProtons().size());
     }
 
     public Set<Element> getColliders() {

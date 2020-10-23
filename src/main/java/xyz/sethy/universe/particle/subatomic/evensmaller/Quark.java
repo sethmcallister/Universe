@@ -1,4 +1,4 @@
-package xyz.sethy.universe.subatomic.evensmaller;
+package xyz.sethy.universe.particle.subatomic.evensmaller;
 
 /**
  * Created by seth on 26/06/17.

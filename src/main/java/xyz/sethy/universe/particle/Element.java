@@ -1,7 +1,7 @@
-package xyz.sethy.universe;
+package xyz.sethy.universe.particle;
 
 import xyz.sethy.universe.location.Location;
-import xyz.sethy.universe.subatomic.Electron;
+import xyz.sethy.universe.particle.subatomic.Electron;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

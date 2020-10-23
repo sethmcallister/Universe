@@ -1,4 +1,4 @@
-package xyz.sethy.universe.subatomic;
+package xyz.sethy.universe.particle.subatomic;
 
 
 /**
