@@ -1,11 +1,11 @@
 package xyz.sethy.universe.factories;
 
-import xyz.sethy.universe.Element;
-import xyz.sethy.universe.Nucleus;
-import xyz.sethy.universe.subatomic.Neutron;
-import xyz.sethy.universe.subatomic.Proton;
-import xyz.sethy.universe.subatomic.evensmaller.Quark;
-import xyz.sethy.universe.subatomic.evensmaller.QuarkType;
+import xyz.sethy.universe.particle.Element;
+import xyz.sethy.universe.particle.Nucleus;
+import xyz.sethy.universe.particle.subatomic.Neutron;
+import xyz.sethy.universe.particle.subatomic.Proton;
+import xyz.sethy.universe.particle.subatomic.evensmaller.Quark;
+import xyz.sethy.universe.particle.subatomic.evensmaller.QuarkType;
 import xyz.sethy.universe.utils.EventUtil;
 
 import java.util.LinkedHashSet;

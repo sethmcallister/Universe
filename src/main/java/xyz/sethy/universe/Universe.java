@@ -1,9 +1,13 @@
 package xyz.sethy.universe;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.sethy.universe.events.ElementMoveEvent;
 import xyz.sethy.universe.factories.NucleiFactory;
 import xyz.sethy.universe.location.Location;
-import xyz.sethy.universe.subatomic.Electron;
+import xyz.sethy.universe.particle.Element;
+import xyz.sethy.universe.particle.Nucleus;
+import xyz.sethy.universe.particle.subatomic.Electron;
 import xyz.sethy.universe.utils.UniverseThread;
 import xyz.sethy.universe.utils.event.ASyncEvent;
 import xyz.sethy.universe.utils.event.Event;
@@ -17,6 +21,8 @@ import java.util.Set;
  * Created by seth on 26/06/17.
  */
 public class Universe {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Universe.class);
+
     private static Universe instance;
     private final Set<Element> elements;
     private final NucleiFactory nucleiFactory;
@@ -41,7 +47,7 @@ public class Universe {
             electrons.add(new Electron());
             Element element = new Element(nucleus, electrons);
             this.elements.add(element);
-            System.out.println("Created Element: Hydrogen");
+
         }
         this.mainUniverseThread = new UniverseThread() {
             @Override
@@ -57,7 +63,7 @@ public class Universe {
 
     private void tick() {
         if (!this.laskTickCompleted) {
-            System.out.println("last tick not completed");
+            LOGGER.warn("Universe: Last tick not completed");
             return;
         }
         final Set<Event> events = new LinkedHashSet<>();
@@ -105,7 +111,8 @@ public class Universe {
 //
 //            System.out.print(toPrint.toString());
 //        }
-        System.out.println("------- TICK COMPLETE -----------");
+
+//        System.out.println("------- TICK COMPLETE -----------");
         this.laskTickCompleted = true;
     }
 
@@ -114,7 +121,6 @@ public class Universe {
         for (Element element : this.elements) {
             if (element.getLocation().getX() == location.getX() && element.getLocation().getY() == location.getY() && element.getLocation().getZ() == element.getLocation().getZ()) {
                 same.add(element);
-                System.out.println("one has the same location");
             }
         }
         return same;

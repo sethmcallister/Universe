@@ -1,6 +1,6 @@
 package xyz.sethy.universe.events;
 
-import xyz.sethy.universe.Element;
+import xyz.sethy.universe.particle.Element;
 import xyz.sethy.universe.utils.event.Event;
 
 /**

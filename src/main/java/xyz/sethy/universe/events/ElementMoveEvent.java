@@ -1,6 +1,8 @@
 package xyz.sethy.universe.events;
 
-import xyz.sethy.universe.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import xyz.sethy.universe.particle.Element;
 import xyz.sethy.universe.location.Location;
 import xyz.sethy.universe.utils.event.ASyncEvent;
 import xyz.sethy.universe.utils.event.Event;
@@ -8,10 +10,9 @@ import xyz.sethy.universe.utils.event.Event;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**
- * Created by seth on 26/06/17.
- */
 public class ElementMoveEvent extends Event implements ASyncEvent {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElementMoveEvent.class);
+
     private final Location to;
     private final Location from;
     private final Element element;
@@ -47,7 +48,7 @@ public class ElementMoveEvent extends Event implements ASyncEvent {
         final ElementCollideEvent event = new ElementCollideEvent(colliders);
         getUniverse().callEvent(event);
 
-        System.out.println("ElementMoveEvent: Element moved x:(" + (to.getX()) + "), y:(" + (to.getY()) + "), z:(" + (to.getZ()) + ")");
+        LOGGER.debug("ElementMoveEvent: Element moved x:{}, y:{}, z{}", to.getX(), to.getY(), to.getZ());
     }
 
     @Override
